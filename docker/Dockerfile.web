@@ -1,0 +1,15 @@
+FROM node:20.12.0-alpine3.19
+
+WORKDIR /app
+
+COPY package-lock.json package.json turbo.json ./
+
+COPY apps/web ./apps/web
+COPY packages packages
+
+RUN npm install
+RUN npm run build
+# if you have a database in your project and prisma orm, you can run the following command to generate the prisma client
+# RUN cd packages/db && npx prisma generate
+
+CMD [ "npm","run","start-web" ]
