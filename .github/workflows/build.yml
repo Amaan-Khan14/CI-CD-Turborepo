@@ -3,7 +3,7 @@ name: Build
 on:
   pull_request:
     branches:
-      - master
+      - main
 
 jobs:
   build:
@@ -16,5 +16,7 @@ jobs:
           node-version: "20"
       - name: Install dependencies
         run: npm install
+    #   - name: Generate prisma client
+    #     run: cd packages/db && npx prisma generate && cd ../.. only if u have prisma
       - name: Turbo Build
         run: npm run build
